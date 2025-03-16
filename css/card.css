@@ -110,7 +110,7 @@ background: #ccc;
   margin-top: 0px;
   margin-bottom: 5px;
   display: flex;
-  justify-content: right;
+ justify-content: space-between;
   width: 100%;
 }
 .btns button{
@@ -129,7 +129,7 @@ background: #ccc;
 .btns button:first-child{
   background: none;
   margin-right: 2px;
-  width: 15%;
+  width: 20%;
 }
 .btns button:last-child{
   color: #fff;
