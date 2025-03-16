@@ -109,6 +109,7 @@ background: #ccc;
 .btns{
   margin-top: 0px;
   margin-bottom: 5px;
+  margin-top:2px;
   display: flex;
  justify-content: space-between;
   width: 100%;
