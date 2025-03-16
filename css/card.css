@@ -32,7 +32,7 @@ height: auto;
 margin: 10px 10px;
 box-shadow: 0 5px 25px rgb(5 5 5 / 20%);
 /* box-shadow: 2px 1px 2px rgb(42, 42, 41); */
-border-radius: 10px;
+border-radius: 4px;
 overflow: hidden;
 }
 .card-image{
