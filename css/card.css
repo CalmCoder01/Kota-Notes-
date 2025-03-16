@@ -119,7 +119,7 @@ background: #ccc;
   padding: 3px 0px;
   outline: none;
   border: 2px solid #8e44ad;
-  border-radius: 6px;
+  border-radius: 2px;
   cursor: pointer;
   font-size: 12px;
   font-weight: 300;
@@ -129,7 +129,7 @@ background: #ccc;
 .btns button:first-child{
   background: none;
   margin-right: 2px;
-  width: 20%;
+  width: 40%;
 }
 .btns button:last-child{
   color: #fff;
