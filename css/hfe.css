@@ -292,7 +292,7 @@ nav .fa-solid {
     flex-direction: column;
     position: fixed;
     left: 10px;
-    bottom: 110px;
+    bottom: 80px;
     z-index:5;
     border-radius: 50%;
 
@@ -1104,5 +1104,6 @@ nav .fa-solid {
         margin: auto;
     }
  }   
+
 
 
