@@ -1,0 +1,96 @@
+/* ===== Google Font Import - Poppins ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.download-container{
+   
+    width: 90%;
+    border-radius: 6px;
+    padding: 0px;
+    margin: 10px 15px;
+    margin: auto;
+    margin-top: -60px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+   
+}
+
+.download{
+
+
+    flex: 50%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px  15px;
+    flex: 50%;
+    border-right: 2px solid gold;
+}
+.download:last-child {
+    border: none;
+  }
+
+.download h5{
+    margin: 2px 0px;
+    text-align: center;
+    font-size: 10px;
+}
+
+.download img{
+    width: 20%;
+    display: block;
+    align-items: center;
+}
+
+
+
+
+
+/* -------------------------------------------------------no-preview page----------------------------------------------------- */
+
+
+
+.nopreview {
+    height: 100vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    color: black;
+    text-align: center;
+
+}
+.btn-whatsaap{
+    margin-top: 20px;
+
+}
+.btn-whatsaap span{
+    /* border: 2px solid #1ab79d; */
+      padding: 10px; 
+     border-radius: 5px;
+      margin-top: 10px;
+      background-color: #1ab79d;
+      color: white;
+} 
+
+
+
+
+
+
+
+@media (max-width: 550px) {
+    form .fields .input-field{
+        width: 100%;
+    }
+}
