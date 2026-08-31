@@ -1,0 +1,1415 @@
+/* ============================================================================
+   custom-material.css  —  Kota Notes Adda
+   ----------------------------------------------------------------------------
+   Is file me SIRF nayi sections ka style hai. hfe.css aur style.css ko chhua
+   nahi gaya hai kyunki wo dusre pages bhi use karte hain.
+
+   Sabhi classes  kn-  se shuru hoti hain taaki purane rules (.row, .about-col,
+   .testimonials-col waghairah) se takraav na ho.
+
+   COLORS — sab pehle se site me maujood hain, koi naya color add nahi kiya:
+     --primary-color    #005B75          nav, buttons, headings   (hfe.css)
+     --secondary-color  rgb(214,192,151) wheat accent             (hfe.css)
+     rgb(202,152,14)    gold             footer heading, logo     (style.css)
+     #24262b            dark             footer background        (style.css)
+     #e3f0ed            pale mint        testimonial card         (hfe.css)
+     #f0f8ff            alice blue       scrolling band           (hfe.css)
+     rgba(85,196,68,.227) pale green     join group button        (hfe.css)
+     rgb(10,90,24)      dark green       whatsapp                 (hfe.css)
+     #F99D27            orange           rating stars             (hfe.css)
+     rgb(15,148,139)    teal             "study material" heading (page)
+     #9a0909            deep red         "question bank" heading  (page)
+     #464652 / #212323 / #dcdbdb   greys                          (hfe/style)
+
+   FONTS — dono pehle se load hain, koi nayi font nahi:
+     'Playfair Display', serif   headings   (HTML <link>)
+     'Poppins', sans-serif       body       (@import in style.css)
+   ========================================================================== */
+
+
+/* ---------------------------------------------------------------- base ---- */
+
+/* Nav ka padding .5% 4% hai, yaani nav 92% width leta hai. Content ko bhi
+   wahi 92% de diya taaki dono ek line me aayein aur side ka khaali space
+   kam ho. */
+.kn-wrap {
+    width: 92%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.kn-section {
+    padding: 46px 0;
+}
+
+.kn-head {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.kn-head h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0 0 8px;
+    line-height: 1.25;
+}
+
+.kn-head p {
+    font-family: 'Poppins', sans-serif;
+    font-size: .92rem;
+    color: #464652;
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Minimal UI: patli line, bhaari shadow nahi */
+.kn-card {
+    background: #ffffff;
+    border: 1px solid #e2e2e2;
+    border-radius: 6px;
+}
+
+/* Naye sections ke andar .hero-btn chhota rakho — global rule 20px hai,
+   jo minimal card footer me bahut bhaari lagta hai. */
+.kn-section .hero-btn,
+.kn-split .hero-btn {
+    font-size: .85rem;
+    padding: 8px 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+
+/* ------------------------------------------------------- 1. hero slider ---- */
+
+.kn-hero {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    /* banner ke neeche wale page se match kare, warna round corners par
+       alag rang ki jhalak dikhti hai */
+    background: #ffffff;
+    /* nav ka z-index 3 hai — carousel usse neeche rehna chahiye */
+    z-index: 1;
+}
+
+.kn-viewport {
+    /* Banner poori width leta hai. Height khud image ke ratio se aati hai —
+       abhi lagi image 2171 x 724 ki hai, isliye ratio 2171/724 (3:1)
+       likha hai: 1440px screen par ~480px, 390px phone par ~130px.
+
+       >> NAYI BANNER IMAGE LAGAO TO YAHI DO NUMBER BADAL DENA <<
+          (image ki asli width / height). Bas itna hi — height apne aap
+          set ho jayegi, na crop hogi na side me khaali patti aayegi.
+          Saari carousel images ek hi ratio ki rakhna. */
+    width: 100%;
+    aspect-ratio: 2171 / 724;
+    overflow: hidden;
+
+    /* neeche ke dono kone gol — banner page me thoda soft baithta hai */
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+}
+
+/* aspect-ratio purane browser me na chale to wahi ratio vw me:
+   100 / 3 = 33.3 */
+@supports not (aspect-ratio: 1 / 1) {
+    .kn-viewport { height: 33.3vw; }
+}
+
+.kn-slides {
+    display: flex;
+    height: 100%;
+    transition: transform .6s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .kn-slides { transition: none; }
+}
+
+.kn-slide {
+    flex: 0 0 100%;
+    height: 100%;
+}
+
+.kn-slide img {
+    width: 100%;
+    height: 100%;
+    /* contain = image kabhi crop nahi hogi, banner ka text safe rahega */
+    object-fit: contain;
+    object-position: center;
+    display: block;
+}
+
+/* ------------------------------------------- carousel controls (shared) ---
+   Arrows aur dots pehle image / card ke upar tairte the aur content ko
+   dhak lete the. Ab dono carousel ke controls neeche ek hi patti me hain:
+        <   . . . .   >
+   Style dono jagah ek jaisa rahe isliye .kn-nav / .kn-dot share kiye hain.
+   -------------------------------------------------------------------- */
+
+.kn-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 14px 0 2px;
+}
+
+/* hero ki patti thodi tight — landing par jagah bachti hai */
+.kn-hero .kn-nav { padding: 10px 0; }
+
+.kn-arrow,
+.kn-fac-arrow {
+    flex: none;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid #d5e4e0;
+    border-radius: 50%;
+    background: #ffffff;
+    color: var(--primary-color);
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.kn-arrow:hover,
+.kn-fac-arrow:hover {
+    background: var(--primary-color);
+    color: #ffffff;
+    border-color: var(--primary-color);
+}
+
+.kn-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+}
+
+.kn-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #d5e4e0;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.kn-dot:hover { background: #b9d2cc; }
+
+/* chalu slide ka dot bada aur gehra — reference image jaisa */
+.kn-dot.is-active {
+    width: 11px;
+    height: 11px;
+    background: var(--primary-color);
+}
+
+
+/* ------------------------------------------- 2. whatsapp community band ---- */
+
+/* Client ne jo image di hai wahi layout: halka green rounded card, left me
+   safed circle ke andar whatsapp icon, right me green pill button.
+   Green wahi hai jo site me pehle se hai — rgba(85,196,68,.227) wala
+   rgb(85,196,68), bas alag alpha par. */
+
+.kn-wa-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    background: rgba(85, 196, 68, .10);
+    border: 1px solid rgba(85, 196, 68, .45);
+    border-radius: 10px;
+    padding: 12px 12px 12px 16px;
+}
+
+.kn-wa-text {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: .92rem;
+    font-weight: 500;
+    line-height: 1.45;
+    color: #212323;
+}
+
+.kn-wa-badge {
+    flex: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid rgba(85, 196, 68, .45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kn-wa-badge .fab {
+    color: green;
+    font-size: 19px;
+}
+
+.kn-wa-join {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    background: rgb(85, 196, 68);
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: .85rem;
+    font-weight: 600;
+    padding: 9px 22px;
+    border: 2px solid rgb(85, 196, 68);
+    border-radius: 40px;
+    white-space: nowrap;
+    transition: .4s;
+}
+
+.kn-wa-join .fab { font-size: 17px; }
+
+.kn-wa-join:hover {
+    background: #ffffff;
+    color: rgb(10, 90, 24);
+    border-color: rgb(10, 90, 24);
+}
+
+
+/* ------------------------ 3. banner + custom material (side by side) ------- */
+
+.kn-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: center;
+}
+
+.kn-split-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+}
+
+.kn-cm {
+    padding: 26px 28px;
+}
+
+.kn-cm h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    color: var(--primary-color);
+    margin: 0 0 10px;
+    line-height: 1.25;
+}
+
+.kn-cm > p {
+    font-family: 'Poppins', sans-serif;
+    font-size: .9rem;
+    color: #464652;
+    line-height: 1.6;
+    margin: 0 0 16px;
+}
+
+.kn-cm-list {
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0;
+    display: grid;
+    gap: 9px;
+}
+
+.kn-cm-list li {
+    font-family: 'Poppins', sans-serif;
+    font-size: .88rem;
+    color: #212323;
+    padding-left: 26px;
+    position: relative;
+    line-height: 1.5;
+}
+
+.kn-cm-list li::before {
+    content: "\2713";           /* checkmark */
+    position: absolute;
+    left: 0;
+    top: -1px;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* whatsapp button — PDF me green pill tha, yahan site ka green use kiya */
+.kn-wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    background: rgb(10, 90, 24);
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: .9rem;
+    font-weight: 500;
+    padding: 11px 22px;
+    border-radius: 40px;
+    border: 2px solid rgb(10, 90, 24);
+    transition: .4s;
+}
+
+.kn-wa-btn .fab { font-size: 20px; }
+
+.kn-wa-btn:hover {
+    background: #ffffff;
+    color: rgb(10, 90, 24);
+}
+
+
+/* --------------------------------------------- 4. material cards (2-up) ---- */
+
+.kn-mat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+/* Rang wahi do hain jo client ne diye — #357d91 aur #04556b — par solid
+   bharne ke bajaye unke halke tint use kiye hain, taaki card bhaari na
+   lage. Text ke liye hi solid #04556b rakha hai (padhne ke liye contrast
+   chahiye), baaki sab jagah alpha kam kiya hai. */
+.kn-mat {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: rgba(53, 125, 145, .06);
+    border: 2px solid rgba(4, 85, 107, .22);
+}
+
+.kn-mat h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    margin: 0;
+    padding: 16px 20px 12px;
+    color: #04556b;
+}
+
+/* Drive links ab raw URL ki tarah dump nahi honge — subject row + chhota
+   Preview button. */
+.kn-subs {
+    list-style: none;
+    margin: 0;
+    padding: 0 20px;
+    flex-grow: 1;
+}
+
+.kn-subs li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 11px 0;
+    border-top: 1px solid rgba(4, 85, 107, .12);
+}
+
+.kn-subs li:first-child { border-top: none; }
+
+.kn-sub-name {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: 'Poppins', sans-serif;
+    font-size: .88rem;
+    font-weight: 500;
+    color: #212323;
+}
+
+.kn-sub-name .fa-solid {
+    color: #357d91;
+    font-size: 14px;
+}
+
+.kn-preview {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: .75rem;
+    font-weight: 500;
+    color: #04556b;
+    background: #ffffff;
+    border: 1px solid rgba(4, 85, 107, .3);
+    border-radius: 40px;
+    padding: 4px 13px;
+    white-space: nowrap;
+    transition: .3s;
+}
+
+.kn-preview:hover {
+    background: #357d91;
+    color: #ffffff;
+    border-color: #357d91;
+}
+
+.kn-mat-foot {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 16px 20px;
+    margin-top: 14px;
+    border-top: 1px solid rgba(4, 85, 107, .12);
+    background: rgba(53, 125, 145, .13);
+}
+
+
+/* Card ka body halka tint hai, par buttons solid #04556b — bhare hue
+   button hi clickable lagte hain. Hover par halka #357d91 aur zara sa
+   upar uthta hai, click par wapas baith jata hai — press hone ka feel.
+
+   Offer (kati hui keemat + nayi keemat + 50% OFF) button ke andar hi
+   hai — koi alag card nahi. Jagah kam pade to content apne aap doosri
+   line me chala jata hai (flex-wrap). */
+.kn-mat-foot .hero-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px 7px;
+    padding: 9px 12px;
+    line-height: 1.35;
+    text-align: center;
+    background: #04556b;
+    color: #ffffff;
+    border: 1px solid #04556b;
+    font-weight: 500;
+    box-shadow: 0 1px 2px rgba(4, 85, 107, .25);
+    transition: background .25s, border-color .25s, transform .15s, box-shadow .25s;
+}
+
+.kn-mat-foot .hero-btn:hover {
+    background: #357d91;
+    color: #ffffff;
+    border-color: #357d91;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(4, 85, 107, .28);
+}
+
+.kn-mat-foot .hero-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(4, 85, 107, .25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .kn-mat-foot .hero-btn:hover,
+    .kn-mat-foot .hero-btn:active { transform: none; }
+}
+
+.kn-btn-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: .88rem;
+    font-weight: 600;
+}
+
+/* Purani keemat — kati hui. Pehle bahut halki thi, discount dikhta hi
+   nahi tha. Ab rang lagbhag safed hai aur kaat ki line moti, taaki
+   "3000 se 1500" saaf padha ja sake. */
+.kn-mat-foot .hero-btn s {
+    font-size: .78rem;
+    color: rgba(255, 255, 255, .92);
+    text-decoration-line: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: rgba(255, 255, 255, .92);
+    text-underline-offset: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+/* nayi keemat — button ki sabse bhaari cheez */
+.kn-mat-foot .hero-btn b {
+    font-size: .95rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Offer badge laal hai (#9a0909, page me pehle se). Gehre button par
+   laal text padha nahi jata, isliye badge safed bhara hua hai aur
+   text laal — laal bhi rahega aur saaf bhi dikhega. */
+.kn-off {
+    font-family: 'Poppins', sans-serif;
+    font-size: .58rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    color: #9a0909;
+    background: #ffffff;
+    border-radius: 40px;
+    padding: 3px 7px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+
+/* --------------------------------------------------- 5. why choose us ------ */
+
+.kn-why-frame {
+    border: 2px solid var(--primary-color);
+    border-radius: 6px;
+    padding: 26px 10px;
+    background: #ffffff;
+}
+
+.kn-why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.kn-why-item {
+    text-align: center;
+    padding: 6px 16px;
+    border-left: 1px dashed #d5d5d5;
+}
+
+.kn-why-item:first-child { border-left: none; }
+
+.kn-why-item .fa-solid {
+    font-size: 30px;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    display: block;
+}
+
+.kn-why-item h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: .82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    color: #212323;
+    line-height: 1.45;
+    margin: 0;
+}
+
+
+/* ------------------------------------------------------- 6. stats band ----- */
+
+.kn-stats {
+    background: var(--primary-color);
+    padding: 30px 0;
+}
+
+.kn-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    text-align: center;
+}
+
+.kn-stat .fa-solid {
+    font-size: 22px;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+    display: block;
+}
+
+.kn-stat strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+
+.kn-stat span {
+    font-family: 'Poppins', sans-serif;
+    font-size: .8rem;
+    color: #dcdbdb;
+}
+
+
+/* --------------------------------------- 7. custom material creation ------- */
+
+.kn-cmc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.kn-cmc-card {
+    text-align: center;
+    padding: 24px 14px;
+    transition: border-color .3s;
+}
+
+.kn-cmc-card:hover { border-color: var(--primary-color); }
+
+.kn-cmc-card .fa-solid {
+    font-size: 26px;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    display: block;
+}
+
+.kn-cmc-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #212323;
+    margin: 0 0 6px;
+}
+
+.kn-cmc-card p {
+    font-family: 'Poppins', sans-serif;
+    font-size: .78rem;
+    color: #464652;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.kn-cta-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.kn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    background: var(--primary-color);
+    color: #ffffff;
+    border: 2px solid var(--primary-color);
+    border-radius: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-size: .85rem;
+    font-weight: 500;
+    padding: 11px 26px;
+    transition: .4s;
+}
+
+.kn-cta:hover {
+    background: #ffffff;
+    color: var(--primary-color);
+}
+
+
+/* ------------------------------------------------ 8. how we work with you -- */
+
+.kn-how {
+    background: #f0f8ff;
+}
+
+/* Client ki reference image wala layout: left me rounded icon tile,
+   right me uppercase heading + text. Step number tile ke corner par
+   chhote badge me hai — ye section ek sequence hai, isliye number
+   rakhna zaroori tha. Icons Font Awesome ke hain (page me pehle se
+   load hai), koi nayi icon library add nahi ki. */
+
+.kn-how-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.kn-how-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    text-align: left;
+    padding: 20px 20px 20px 18px;
+    border-radius: 10px;
+    transition: border-color .3s;
+}
+
+.kn-how-card:hover { border-color: var(--primary-color); }
+
+.kn-how-icon {
+    position: relative;
+    flex: none;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: #e3f0ed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kn-how-icon .fa-solid {
+    font-size: 18px;
+    color: var(--primary-color);
+}
+
+.kn-how-icon b {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: .6rem;
+    font-weight: 600;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.kn-how-card h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: .84rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--primary-color);
+    margin: 3px 0 7px;
+    line-height: 1.3;
+}
+
+.kn-how-card p {
+    font-family: 'Poppins', sans-serif;
+    font-size: .78rem;
+    color: #464652;
+    margin: 0;
+    line-height: 1.6;
+}
+
+
+/* ------------------------------------------------ 9. faculty testimonial --- */
+
+/* Testimonial ab sliding carousel hai. Kitne card ek saath dikhein ye
+   yahin se set hota hai — JS card ki asli width naap kar chalta hai,
+   isliye breakpoint badalne par apne aap adjust ho jata hai.
+   Desktop 3  /  tablet 2  /  phone 1. */
+
+.kn-fac-carousel {
+    position: relative;
+}
+
+.kn-fac-viewport {
+    overflow: hidden;
+}
+
+.kn-fac-track {
+    display: flex;
+    gap: 20px;
+    transition: transform .6s ease;
+    will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .kn-fac-track { transition: none; }
+}
+
+/* 3 card + 2 gap (20px each) */
+.kn-fac-card {
+    flex: 0 0 calc((100% - 40px) / 3);
+    background: #e3f0ed;
+    border: 1px solid #d5e4e0;
+    border-radius: 6px;
+    padding: 22px 22px 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.kn-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--primary-color);
+    opacity: .35;
+    margin-bottom: 8px;
+}
+
+.kn-fac-card blockquote {
+    font-family: 'Poppins', sans-serif;
+    font-size: .86rem;
+    color: #212323;
+    line-height: 1.6;
+    margin: 0 0 18px;
+    flex-grow: 1;
+}
+
+.kn-fac-by {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid #d5e4e0;
+    padding-top: 14px;
+}
+
+/* Photo wala circle. Jis card me asli photo nahi hai wahan icon dikhta hai. */
+.kn-avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #d5e4e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+}
+
+.kn-avatar .fa-solid {
+    color: var(--primary-color);
+    font-size: 22px;
+}
+
+/* Asli faculty photo. Yahan koi zoom/offset jaan-boojh kar nahi rakha —
+   photo hi square aur chehra beech me hona chahiye (320x320 theek hai).
+   Aisi photo har circle me apne aap sahi baithti hai. */
+.kn-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.kn-fac-by b {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: .85rem;
+    color: #212323;
+}
+
+.kn-fac-by span {
+    font-family: 'Poppins', sans-serif;
+    font-size: .75rem;
+    color: #464652;
+}
+
+
+/* ----------------------------------------------------------- 10. faq ------- */
+
+.kn-faq-list {
+    max-width: 760px;
+    margin: 0 auto;
+    display: grid;
+    gap: 10px;
+}
+
+.kn-faq-item {
+    background: #ffffff;
+    border: 1px solid #e2e2e2;
+    border-radius: 6px;
+    padding: 0 18px;
+}
+
+.kn-faq-item summary {
+    font-family: 'Poppins', sans-serif;
+    font-size: .9rem;
+    font-weight: 500;
+    color: #212323;
+    padding: 14px 0;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.kn-faq-item summary::-webkit-details-marker { display: none; }
+
+.kn-faq-item summary::after {
+    content: "\002B";           /* + */
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    flex: none;
+}
+
+.kn-faq-item[open] summary::after { content: "\2212"; }   /* – */
+
+.kn-faq-item .kn-faq-body {
+    font-family: 'Poppins', sans-serif;
+    font-size: .85rem;
+    color: #464652;
+    line-height: 1.6;
+    padding: 0 0 16px;
+    border-top: 1px solid #ededed;
+    margin-top: -1px;
+    padding-top: 14px;
+}
+
+
+/* -------------------------------------------------- 11. useful links ------- */
+
+.kn-links {
+    background: #f9f9f9;
+}
+
+.kn-links-grid {
+    display: grid;
+    /* Fix 3 columns nahi — auto-fit. Jitne links ek line me 210px se
+       chaudi reh kar aa sakte hain, utne ek hi row me aa jate hain.
+       4 links badi screen par ab do row nahi lete. Link add/remove karne
+       par bhi apne aap adjust ho jata hai. */
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px;
+}
+
+/* Ab raw URL nahi, saaf label (DPPs / Tests / Question Banks). Daayein
+   taraf arrow isliye hai taaki saaf lage ki ye kahin le jaane wala link
+   hai. Content js/useful-links.js se aata hai. */
+.kn-link {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    text-decoration: none;
+    background: #ffffff;
+    border: 1px solid #e2e2e2;
+    border-radius: 6px;
+    padding: 15px 18px;
+    font-family: 'Poppins', sans-serif;
+    font-size: .86rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    transition: border-color .3s;
+}
+
+.kn-link:hover { border-color: var(--primary-color); }
+
+.kn-link .fa-solid { flex: none; }
+
+.kn-link span { flex: 1; }
+
+.kn-link-go {
+    font-size: .8rem;
+    opacity: .55;
+    transition: transform .3s, opacity .3s;
+}
+
+.kn-link:hover .kn-link-go {
+    opacity: 1;
+    transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .kn-link-go { transition: opacity .3s; }
+    .kn-link:hover .kn-link-go { transform: none; }
+}
+
+
+/* ======================================================== responsive ====== */
+
+@media (max-width: 900px) {
+
+    .kn-why-grid,
+    .kn-cmc-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .kn-why-item:nth-child(3) { border-left: none; }
+
+    .kn-why-item:nth-child(n+3) {
+        border-top: 1px dashed #d5d5d5;
+        margin-top: 20px;
+        padding-top: 20px;
+    }
+
+    /* tablet par links ko auto-fit hi sambhal leta hai —
+       1 column sirf phone (700px) par. */
+
+    /* tablet: 2 card + 1 gap */
+    .kn-fac-card { flex-basis: calc((100% - 20px) / 2); }
+}
+
+@media (max-width: 700px) {
+
+    /* Mobile par side ka gutter aur kam — content ko poori width milti hai */
+    .kn-wrap { width: 94%; }
+
+    .kn-section { padding: 30px 0; }
+
+    .kn-head { margin-bottom: 22px; }
+
+    .kn-head h2 { font-size: 1.5rem; }
+
+    .kn-split,
+    .kn-mat-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    /* Mobile portrait: pehle custom material section, uske neeche image.
+       Desktop par image left / section right waisa hi rehta hai. */
+    .kn-cm { order: 1; }
+    .kn-split-img { order: 2; }
+
+    .kn-cm { padding: 18px 16px; }
+
+    .kn-cm h2 { font-size: 1.35rem; }
+
+    /* ---- mobile me andar ka padding tight ---- */
+    /* ---------------------------------------------------------------
+       MOBILE PAR ANDAR KA PADDING SAB JAGAH 16px HAI.
+
+       Page ka gutter 12px hai + card ka border 1px, isliye har card ka
+       text theek 12 + 1 + 16 = 29px par shuru hota hai. Neeche scroll
+       karte waqt saara text ek hi seedh me rehta hai.
+       Naya card banao to left/right padding 16px hi rakhna.
+       --------------------------------------------------------------- */
+
+    /* Phone: text left me 2 line me, button usi row me right side. */
+    .kn-wa-card { padding: 10px 10px 10px 16px; gap: 9px; }
+    .kn-wa-text { font-size: .76rem; gap: 8px; line-height: 1.4; }
+    .kn-wa-badge { width: 27px; height: 27px; }
+    .kn-wa-badge .fab { font-size: 15px; }
+    .kn-wa-join { padding: 8px 12px; font-size: .74rem; gap: 6px; }
+    .kn-wa-join .fab { font-size: 14px; }
+
+    .kn-mat h3 { padding: 14px 16px 10px; }
+    .kn-subs { padding: 0 16px; }
+    .kn-mat-foot { grid-template-columns: 1fr; padding: 14px 16px; }
+
+    .kn-links-grid { grid-template-columns: 1fr; }
+
+    /* phone: ek waqt me ek hi testimonial card */
+    .kn-fac-card { flex-basis: 100%; }
+    .kn-fac-track { gap: 14px; }
+    .kn-avatar { width: 48px; height: 48px; }
+    .kn-avatar .fa-solid { font-size: 20px; }
+
+    .kn-why-frame { padding: 20px 6px; }
+    .kn-cmc-card { padding: 18px 12px; }
+    .kn-how-card { padding: 16px; gap: 13px; }
+    .kn-fac-card { padding: 18px 16px 14px; }
+    .kn-faq-item { padding: 0 16px; }
+    .kn-link { padding: 13px 16px; }
+
+    .kn-stats-grid { gap: 14px; }
+
+    .kn-stat strong { font-size: 1.5rem; }
+
+    .kn-stat span { font-size: .7rem; }
+
+    .kn-viewport {
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+    }
+
+    .kn-nav { gap: 11px; padding-top: 12px; }
+    .kn-arrow,
+    .kn-fac-arrow { width: 29px; height: 29px; font-size: 12px; }
+}
+
+@media (max-width: 480px) {
+
+    /* Why Choose Us aur Custom Material Creation — dono me 4-4 icon wale
+       items hain. Chhoti screen par bhi 2x2 matrix me rakhe hain taaki
+       scroll aadha ho jaye. Divider lines ka 2-column wala pattern
+       900px block me pehle se set hai, wahi yahan bhi chalta hai. */
+    .kn-why-grid,
+    .kn-cmc-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* 2x2 me har box ~200px ka reh jata hai, isliye padding aur type
+       thoda chhota kar diya warna text tang lagta hai. */
+    .kn-why-frame { padding: 18px 2px; }
+    .kn-why-item { padding: 6px 8px; }
+    .kn-why-item .fa-solid { font-size: 24px; margin-bottom: 9px; }
+    .kn-why-item h4 { font-size: .7rem; letter-spacing: .02em; }
+    .kn-why-item:nth-child(n+3) { margin-top: 16px; padding-top: 16px; }
+
+    .kn-cmc-grid { gap: 12px; }
+    .kn-cmc-card { padding: 16px 9px; }
+    .kn-cmc-card .fa-solid { font-size: 22px; margin-bottom: 9px; }
+    .kn-cmc-card h4 { font-size: .95rem; }
+    .kn-cmc-card p { font-size: .72rem; }
+
+    /* "How We Work With You" ke cards horizontal hain (icon + text),
+       isliye chhoti screen par reference image ki tarah ek column
+       me stack karte hain. */
+    .kn-how-grid { grid-template-columns: 1fr; gap: 12px; }
+    .kn-how-icon { width: 42px; height: 42px; border-radius: 11px; }
+    .kn-how-icon .fa-solid { font-size: 17px; }
+
+    /* 480px par bhi ek hi row: text left, button right.
+       Badge chhupa diya kyunki whatsapp icon ab button ke andar hai —
+       do icon ki zaroorat nahi, aur is 40px se text ko 2 line milti hai. */
+    .kn-wa-badge { display: none; }
+}
+
+
+/* ============================================================ footer ====== */
+/*
+   Client ne kaha: footer ka golden rang aur social media icons #005B75
+   (--primary-color) ho jayein.
+
+   Ye rules yahan is file me hain, style.css me nahi — kyunki style.css
+   site ke saare pages load karte hain aur wahan badalne se har page ka
+   footer badal jata. Poori site par chahiye to bas style.css ki line 50
+   aur 62 ka rgb(202,152,14) badal dena, phir ye block hata dena.
+*/
+
+.footer .footer-col h4 {
+    color: #92d2e4 !important;
+}
+
+.footer .footer-col h4::before {
+    background-color: var(--primary-color);
+}
+
+.footer .footer-col .social-links a {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+.footer .footer-col .social-links a:hover {
+    background-color: #ffffff;
+    color: var(--primary-color);
+}
+
+
+/* ---------------------------------------------------------------------
+   Footer ke columns me apna koi side gutter nahi tha — text screen ke
+   kinare se hi shuru ho jata tha aur upar wale sections se seedh me
+   nahi baithta tha. Yahan bas itna adjust kiya hai ki footer ka text
+   bhi usi 29px par aaye. (Rules is file me hain, style.css me nahi —
+   wo saare pages load karte hain.)
+   ------------------------------------------------------------------ */
+@media (max-width: 700px) {
+    .footer .container { padding: 0 13px; }
+    .footer .footer-col { padding: 0 16px; }
+    .copyright { width: auto; padding: 20px 16px; }
+}
+
+
+/* ==================================================== mobile menu ======== */
+/*
+   Phone ka slide-in menu. Desktop nav bilkul waisa hi rehta hai — neeche
+   ke saare rules 700px ke media query ke andar hain, aur jo do cheezein
+   bahar hain wo desktop par in naye elements ko chhupa deti hain.
+
+   Rang sab page ke apne hain: --primary-color (#005B75), #e3f0ed,
+   #f0f8ff, #f9f9f9, #464652, #212323, #ededed.
+*/
+
+/* Header, group labels aur link icons — desktop par kuch nahi dikhna chahiye.
+
+   NOTE: labels ke liye  .nav-link ul li.<class>  likhna zaroori hai. hfe.css
+   ka  .nav-link ul li { display: inline-block }  zyada specific hai, aur
+   sirf  .kn-menu-label  likhne par MAIN MENU / COMMUNITY desktop nav bar me
+   dikhne lag jate hain. */
+.kn-menu-head,
+.kn-menu-backdrop {
+    display: none;
+}
+
+.nav-link ul li.kn-menu-label,
+.nav-link ul li.kn-menu-only {
+    display: none;
+}
+
+.nav-link ul li a .fa-solid,
+.nav-link ul li a .fab {
+    display: none;
+}
+
+
+@media (max-width: 700px) {
+
+    /* ---- panel ---- */
+    .nav-link {
+        width: 282px;
+        right: -292px;
+        background-color: #ffffff;
+        box-shadow: -6px 0 24px rgba(0, 0, 0, .18);
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    .nav-link.is-open { right: 0; }
+
+    /* ---- backdrop ---- */
+    .kn-menu-backdrop {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        /* halka dim + blur, taaki menu saaf upar tairta hua lage.
+           backdrop-filter na chalne wale purane browser me sirf dim
+           dikhega — layout kahin nahi tootega. */
+        background: rgba(0, 0, 0, .3);
+        -webkit-backdrop-filter: blur(4px);
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .4s, visibility .4s;
+        /* nav ka z-index 3 hai — backdrop usse neeche par baaki
+           page content (jisme .kn-hero z-index 1 hai) ke upar */
+        z-index: 2;
+    }
+
+    .kn-menu-backdrop.is-open { opacity: 1; visibility: visible; }
+
+    body.kn-menu-open { overflow: hidden; }
+
+    /* ---- "Menu" header ---- */
+    .kn-menu-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 16px 18px;
+        background: #f9f9f9;
+        border-bottom: 1px solid #ededed;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .kn-menu-head span {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    .kn-menu-close {
+        flex: none;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        background: #e3f0ed;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: .3s;
+    }
+
+    .kn-menu-close:hover { background: var(--primary-color); }
+    .kn-menu-close:hover .fa-solid { color: #ffffff; }
+
+    /* purana global rule (margin 10px / 22px / kaala) yahan lagu na ho */
+    .kn-menu-close .fa-solid {
+        display: block;
+        margin: 0;
+        font-size: 15px;
+        color: var(--primary-color);
+    }
+
+    /* hamburger teal nav par hai — safed hi theek lagta hai */
+    nav > .fa-solid { color: #ffffff; }
+
+    /* ---- list ---- */
+    .nav-link ul {
+        padding: 2px 0 26px;
+        list-style: none;
+        margin: 0;
+    }
+
+    /* desktop wala  padding: 8px 12px  yahan extra gap de raha tha —
+       spacing ab <a> ke padding se aati hai */
+    .nav-link ul li {
+        display: block;
+        padding: 0;
+    }
+
+    .nav-link ul li.kn-menu-label,
+    .nav-link ul li.kn-menu-only { display: block; }
+
+    /* Group heading: MAIN MENU / COACHING MODULES / COMMUNITY
+
+       NOTE: selector me  ul li  isliye likha hai kyunki upar wala
+       .nav-link ul li { padding: 0 }  zyada specific tha aur label ka
+       padding kha ja raha tha — labels left edge se chipak rahe the. */
+    .nav-link ul li.kn-menu-label,
+    .nav-link .dropdown::before {
+        font-family: 'Poppins', sans-serif;
+        font-size: .66rem;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: var(--primary-color);
+        padding: 20px 18px 8px;
+        display: block;
+    }
+
+    /* pehla label header se sata hua na lage */
+    .nav-link ul li.kn-menu-label:first-child { padding-top: 14px; }
+
+    .nav-link .dropdown::before { content: "Coaching Modules"; }
+
+    /* ---- har row ---- */
+    .nav-link ul li a,
+    .nav-link .dropdown-content a {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        padding: 11px 18px;
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        font-size: .87rem;
+        font-weight: 500;
+        color: #212323;
+        text-decoration: none;
+        border-left: 3px solid transparent;
+        transition: background .25s, color .25s, border-color .25s;
+    }
+
+    .nav-link ul li a:hover,
+    .nav-link ul li a:active,
+    .nav-link .dropdown-content a:hover,
+    .nav-link .dropdown-content a:active {
+        background: #f0f8ff;
+        color: var(--primary-color);
+        border-left-color: var(--primary-color);
+    }
+
+    /* row ke icons — global  nav .fa-solid  wale sizes yahan nahi chahiye */
+    .nav-link ul li a .fa-solid,
+    .nav-link ul li a .fab {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: none;
+        width: 19px;
+        margin: 0;
+        font-size: 15px;
+        color: var(--primary-color);
+    }
+
+    /* purana underline animation mobile par nahi chahiye */
+    .nav-link ul li::after { display: none; }
+
+    /* ---- coaching modules: hover dropdown phone par kaam nahi karta,
+            isliye "coaching Module" wala dead link hata ke saare module
+            seedhe list me dikha diye hain ---- */
+    .nav-link .dropdown .dropbtn { display: none; }
+
+    .nav-link .dropdown-content {
+        display: block;
+        position: static;
+        width: auto;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .nav-link .dropdown-content a { text-align: left; }
+
+    .nav-link .dropdown-content a:hover { background: #f0f8ff; }
+}

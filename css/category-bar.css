@@ -1,0 +1,220 @@
+/* ===== Category Bar Component Styling ===== */
+
+.custom-category-bar {
+    width: 95%;
+    max-width: 1100px;
+    margin: 20px auto;
+    background: #ffffff;
+    border-radius: 50px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+
+/* ===== Category Buttons ===== */
+
+.category-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 32px;
+    min-width: 145px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    position: relative;
+    font-weight: 600;
+    font-size: 15px;
+    color: #4b5563;
+    user-select: none;
+
+    /* Important for TEST SERIES <a> tag */
+    text-decoration: none;
+}
+
+
+/* ===== Category Icons ===== */
+
+.category-btn .cat-icon {
+    font-size: 16px;
+    color: #4b5563;
+    transition: all 0.35s ease;
+}
+
+
+/* ===== Normal Hover ===== */
+
+.category-btn:hover {
+    background: #f3f4f6;
+    color: #1f2937;
+}
+
+.category-btn:hover .cat-icon {
+    color: #1f2937;
+}
+
+
+/* ================================================= */
+/* ===== GLOW + ANIMATION FOR ALL 5 BUTTONS ===== */
+/* ================================================= */
+
+.category-btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 0 5px rgba(168, 28, 28, 0.35),
+        0 0 12px rgba(168, 28, 28, 0.30),
+        0 0 22px rgba(168, 28, 28, 0.20);
+
+    animation: buttonGlow 1.2s ease-in-out infinite alternate;
+}
+
+
+/* ===== Glow Animation ===== */
+
+@keyframes buttonGlow {
+
+    0% {
+        box-shadow:
+            0 0 5px rgba(168, 28, 28, 0.30),
+            0 0 12px rgba(168, 28, 28, 0.20);
+    }
+
+    100% {
+        box-shadow:
+            0 0 8px rgba(168, 28, 28, 0.55),
+            0 0 18px rgba(168, 28, 28, 0.40),
+            0 0 30px rgba(168, 28, 28, 0.25);
+    }
+}
+
+
+/* ================================================= */
+/* ===== ACTIVE BUTTON - ORIGINAL RED COLOR ===== */
+/* ================================================= */
+
+.category-btn.active {
+    background: linear-gradient(135deg, #a81c1c, #8b1414);
+    color: #ffffff !important;
+
+    box-shadow:
+        0 4px 14px rgba(168, 28, 28, 0.35);
+}
+
+
+/* ===== Active Button Icon ===== */
+
+.category-btn.active .cat-icon {
+    color: #fbbf24 !important;
+}
+
+
+/* ===== Active Button Arrow ===== */
+
+.category-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 0;
+    height: 0;
+
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #8b1414;
+}
+
+
+/* ================================================= */
+/* ===== ACTIVE BUTTON HOVER ===== */
+/* ================================================= */
+
+.category-btn.active:hover {
+    background: linear-gradient(135deg, #a81c1c, #8b1414);
+    color: #ffffff !important;
+
+    transform: translateY(-3px);
+
+    animation: activeButtonGlow 1.2s ease-in-out infinite alternate;
+}
+
+
+/* ===== Active Red Glow Animation ===== */
+
+@keyframes activeButtonGlow {
+
+    0% {
+        box-shadow:
+            0 4px 14px rgba(168, 28, 28, 0.35),
+            0 0 8px rgba(168, 28, 28, 0.25);
+    }
+
+    100% {
+        box-shadow:
+            0 4px 18px rgba(168, 28, 28, 0.55),
+            0 0 20px rgba(168, 28, 28, 0.50),
+            0 0 35px rgba(168, 28, 28, 0.30);
+    }
+}
+
+
+/* ================================================= */
+/* ===== TEST SERIES LINK ===== */
+/* ================================================= */
+
+/* Keeps TEST SERIES exactly like the other buttons */
+
+.test-series-btn {
+    color: #4b5563;
+    text-decoration: none;
+}
+
+.test-series-btn .cat-icon {
+    color: #4b5563;
+}
+
+
+/* TEST SERIES hover glow */
+
+.test-series-btn:hover {
+    color: #1f2937;
+    text-decoration: none;
+}
+
+
+/* ================================================= */
+/* ===== MOBILE RESPONSIVE ===== */
+/* ================================================= */
+
+@media (max-width: 768px) {
+
+    .custom-category-bar {
+        border-radius: 15px;
+        padding: 8px;
+        justify-content: center;
+        gap: 6px;
+    }
+
+
+    .category-btn {
+        padding: 8px 6px;
+        font-size: 11px;
+        min-width: 0;
+        flex: 1 1 calc(33.33% - 8px);
+    }
+
+
+    .category-btn .cat-icon {
+        font-size: 14px;
+        gap: 4px;
+    }
+
+}
