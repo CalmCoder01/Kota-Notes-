@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YTZ9VD2JX7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-YTZ9VD2JX7');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- -------------------------------------------------og meta tag----------------------------------------------- -->
+    <meta property="og:title" content="Custom Material Development | Kota Notes Adda">
+    <meta property="og:description"
+        content="Get customised study modules, DPP, test series, question banks and teaching PPTs under your own brand name and logo.">
+    <meta property="og:image" content="https://drive.google.com/uc?export=view&id=1fqCySTQUnsupigMvhvt43N0HVRv1nFJZ">
+    <meta property="og:url" content="https://kota-notes.vercel.app/Allen.html">
+    <meta property="og:type" content="website">
+
+    <!-- ------------------------------------------------------------------------------------------------------------------------------- -->
+    <title>Custom Material Development | Kota Notes Adda</title>
+    <link rel="stylesheet" href="css/hfe.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- nayi sections ka css — sabse last me taaki upar wale rules override ho saken -->
+    <link rel="stylesheet" href="css/custom-material.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="image/Kota notes logo.png" type="image/x-icon">
+
+
+    <script src="https://kit.fontawesome.com/cfbad6e9ab.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- =========================================================== nav ===== -->
+    <!-- nav ab .sub-header1 ke andar nahi hai. Pehle wo 50vh section ke andar
+         tha aur .course-detail us par -120px margin se chadh raha tha — wahi
+         overlapping ki wajah thi. Ab nav seedha body ka child hai, isliye poore
+         page par sticky rehta hai. -->
+    <nav>
+        <div class="logo">
+            <h2 id="bunch">
+                <a href="index.html"><img src="image/Kota notes logo.png" alt="Kota Notes Adda"></a>
+                <span class="Name" style="color:rgb(240 195 32);">Kota </span> <span class="Name"
+                    style="color: rgb(255, 255, 255);">Notes Adda</span>
+            </h2>
+        </div>
+
+        <!-- Mobile menu: .kn-menu-head aur .kn-menu-label sirf phone par dikhte
+             hain (CSS me desktop par hidden hain). Link icons bhi desktop par
+             hide hain — desktop nav bilkul pehle jaisa hi rehta hai. -->
+        <div class="nav-link" id="navLinks">
+
+            <div class="kn-menu-head">
+                <span>Menu</span>
+                <button class="kn-menu-close" type="button" onclick="hideMenu()" aria-label="Menu band karein">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <ul>
+                <li class="kn-menu-label">Main Menu</li>
+                <li><a href="index.html"><i class="fa-solid fa-house"></i>Home</a></li>
+                <li><a href="Q_Bank.html"><i class="fa-solid fa-flask"></i>Q-Bank</a></li>
+                <li><a href="DPP.html"><i class="fa-solid fa-rocket"></i>DPP</a></li>
+                <li><a href="PPT.html"><i class="fa-solid fa-file-powerpoint"></i>PPT</a></li>
+                <li><a href="Test.html"><i class="fa-solid fa-file-pen"></i>Test Series</a></li>
+                <li><a href="Book.html"><i class="fa-solid fa-book"></i>Books</a></li>
+                <li><a href="https://wa.me/+918851552167?text=I want to know more about your services, Kota Notes Adda"
+                        target="_blank" rel="noopener"><i class="fa-solid fa-headset"></i>Contact</a></li>
+
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">coaching Module</a>
+
+                    <div class="dropdown-content">
+                        <div><a href="ALN.html"><i class="fa-solid fa-graduation-cap"></i>Allen</a></div>
+                        <div><a href="Aksh.html"><i class="fa-solid fa-graduation-cap"></i>Aakash</a></div>
+                        <div><a href="Saral.html"><i class="fa-solid fa-graduation-cap"></i>E-saral</a></div>
+                        <div><a href="VCM.html"><i class="fa-solid fa-graduation-cap"></i>VMC JEE</a></div>
+                        <div><a href="Resso.html"><i class="fa-solid fa-graduation-cap"></i>Resonance</a></div>
+                        <div><a href="Academy.html"><i class="fa-solid fa-graduation-cap"></i>Unacademy</a></div>
+                        <div><a href="WP.html"><i class="fa-solid fa-graduation-cap"></i>PW</a></div>
+                        <div><a href="competition.html"><i class="fa-solid fa-graduation-cap"></i>Competishun</a></div>
+                      
+                    </div>
+
+                </li>
+
+                <li class="kn-menu-label kn-menu-only">Community</li>
+                <li class="kn-menu-only">
+                    <a href="https://whatsapp.com/channel/0029VbArHqEDzgTBJEei8N1O" target="_blank" rel="noopener">
+                        <i class="fab fa-whatsapp"></i>WhatsApp Group
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+        <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+    </nav>
+
+    <!-- menu khulne par peechhe ka dim layer; ispar tap karke menu band hota hai -->
+    <div class="kn-menu-backdrop" id="knMenuBackdrop" onclick="hideMenu()"></div>
+
+
+    <!-- ================================================= 1. hero slider ===== -->
+    <!-- Slides JS se bante hain. Image add/remove karne ke liye sirf
+         js/carousel.js ki CAROUSEL_IMAGES list edit karni hai. -->
+    <section class="kn-hero" tabindex="0" aria-label="Featured banners">
+        <div class="kn-viewport">
+            <div class="kn-slides" id="knSlides"></div>
+        </div>
+        <!-- Banner par arrow buttons nahi chahiye the — sirf dots.
+             Dots js/carousel.js ki CAROUSEL_IMAGES list se bante hain. -->
+        <div class="kn-nav">
+            <div class="kn-dots" id="knDots"></div>
+        </div>
+    </section>
+
+
+    <!-- ==================================== 2. whatsapp community band ====== -->
+    <section class="kn-wa-band">
+        <div class="kn-wrap">
+            <div class="kn-wa-card">
+                <div class="kn-wa-text">
+                    <span class="kn-wa-badge"><i class="fab fa-whatsapp"></i></span>
+                    <span>Join our WhatsApp Group for latest study material &amp; updates!</span>
+                </div>
+                <a class="kn-wa-join" href="https://whatsapp.com/channel/0029VbArHqEDzgTBJEei8N1O" target="_blank"
+                    rel="noopener"><i class="fab fa-whatsapp"></i> Join Now</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================ 3. banner + custom material (side by side) ========== -->
+    <!-- Mobile par HTML order hi kaam karta hai: pehle image, phir section. -->
+    <section class="kn-section">
+        <div class="kn-wrap kn-split">
+
+            <div class="kn-split-img">
+                <img src="image/Course page/Allen Digital courese.png"
+                    alt="NEET 2026 NCERT Question Bank with PYQ — latest NCERT edition">
+            </div>
+
+            <div class="kn-cm kn-card">
+                <h2>Custom Material Development</h2>
+                <p>Get customised study modules, DPP, test series and question banks.</p>
+
+                <ul class="kn-cm-list">
+                    <li>Complete study modules — theory plus exercises, chapter-wise</li>
+                    <li>DPP &amp; test series in your own format and pattern</li>
+                    <li>Question banks with detailed solutions</li>
+
+                </ul>
+
+                <a class="kn-wa-btn"
+                    href="https://wa.me/+918851552167?text=I%20want%20Custom%20Material%20Development%20for%20my%20institute"
+                    target="_blank" rel="noopener">
+                    <i class="fab fa-whatsapp"></i> Talk to us on WhatsApp
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ------------------------------------------------------------------------
+         HATAYA GAYA: purana .text-box block (NCERT image + 6 bullet points).
+         Us block ki image wahi NEET 2026 banner hai jo ab upar wale split
+         section me lagi hai — do baar same image dikhti, isliye hata diya.
+         Uske 6 points the:
+           1. Theory Module   2. Exercise Module   3. totally align with neet
+           4. best for Neet   5. based on latest syllabud
+           6. Solution for all Execise
+         Ye points wapas chahiye to bata dena, material cards ke paas daal denge.
+         Purana version  Allen digital.html.bak  me safe hai.
+         --------------------------------------------------------------------- -->
+
+
+    <!-- ================================== 4. study material + question bank == -->
+    <section class="kn-section">
+        <div class="kn-wrap">
+            <div class="kn-mat-grid">
+
+                <div class="kn-mat kn-mat-study kn-card">
+                    <h3 style="color: brown;">Allen Digital JEE Advance Study Material 2027</h3>
+                    <ul class="kn-subs">
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Physics</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/1YLDIn-Y-VxL_BlFZQVOrMQCJauYcRITd?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Chemistry</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/1YLDIn-Y-VxL_BlFZQVOrMQCJauYcRITd?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Maths</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/1YLDIn-Y-VxL_BlFZQVOrMQCJauYcRITd?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                    </ul>
+                    <div class="kn-mat-foot">
+                        <a class="hero-btn"
+                            href="https://wa.me/+918851552167?text=I%20want%20to%20BUY%20Allen%20Digital%20JEE%20Advance%202027%20PCM%20Material%20Pdf"
+                            target="_blank" rel="noopener">
+                            <span class="kn-btn-label">Buy PCM </span>
+                            <s>&#8377;3000</s>
+                            <b>&#8377;1500/-</b>
+                            <span class="kn-off">50% OFF</span></a>
+                        <a class="hero-btn"
+                            href="https://wa.me/+918851552167?text=I%20want%20to%20Buy%20Allen%20JEE%20single%20subject%20Module%20pdf"
+                            target="_blank" rel="noopener">
+                            <span class="kn-btn-label">Buy 1 Subject</span>
+                            <s>&#8377;1000 </s>
+                            <b>&#8377;700/-</b>
+                            <span class="kn-off">30% OFF</span></a>
+                    </div>
+                </div>
+
+                <div class="kn-mat kn-mat-qb kn-card">
+                    <h3 style="color: darkgreen;">Allen Digital NEET Study Material 2027</h3>
+                    <ul class="kn-subs">
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Physics</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/1Y9jRss4pcjrJAvFwZtDe1qN6mRxqssJo?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Chemistry</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/1Y9jRss4pcjrJAvFwZtDe1qN6mRxqssJo?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Biology</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/1Y9jRss4pcjrJAvFwZtDe1qN6mRxqssJo?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                    </ul>
+                    <div class="kn-mat-foot">
+                        <a class="hero-btn"
+                            href="https://wa.me/+918851552167?text=I%20want%20to%20BUY%20Allen%20NEET%20PCB%20Material%20Pdf"
+                            target="_blank" rel="noopener">
+                            <span class="kn-btn-label">Buy PCB</span>
+                            <s>&#8377;3000</s>
+                            <b>&#8377;1500</b>
+                            <span class="kn-off">50% OFF</span></a>
+                        <a class="hero-btn"
+                            href="https://wa.me/+918851552167?text=I%20want%20to%20Buy%20Allen%20NEET%20single%20subject%20Module%20pdf"
+                            target="_blank" rel="noopener">
+                            <span class="kn-btn-label">Buy 1 Subject</span>
+                            <s>&#8377;1000</s>
+                            <b>&#8377;700</b>
+                            <span class="kn-off">30% OFF</span></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+ <section class="kn-section">
+        <div class="kn-wrap">
+            <div class="kn-mat-grid">
+
+                <div class="kn-mat kn-mat-study kn-card">
+                    <h3 style="color: brown;">Allen Digital JEE Advance Study Material 2026</h3>
+                    <ul class="kn-subs">
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Physics</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/19ryIR_uPoG4rKI0jn0Z2ZgX8K-616D4R?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Chemistry</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/19ryIR_uPoG4rKI0jn0Z2ZgX8K-616D4R?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Maths</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/19ryIR_uPoG4rKI0jn0Z2ZgX8K-616D4R?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                    </ul>
+                    <div class="kn-mat-foot">
+                        <a class="hero-btn"
+                            href="https://wa.me/+918851552167?text=I%20want%20to%20BUY%20Allen%20JEE%20Advance%20PCM%20Material%20Pdf"
+                            target="_blank" rel="noopener">
+                            <span class="kn-btn-label">Buy PCM </span>
+                            <s>&#8377;2000</s>
+                            <b>&#8377;1000/-</b>
+                            <span class="kn-off">50% OFF</span></a>
+                        <a class="hero-btn"
+                            href="https://wa.me/+918851552167?text=I%20want%20to%20Buy%20Allen%20JEE%20single%20subject%20Module%20pdf"
+                            target="_blank" rel="noopener">
+                            <span class="kn-btn-label">Buy 1 Subject</span>
+                            <s>&#8377;1000 </s>
+                            <b>&#8377;500/-</b>
+                            <span class="kn-off">50% OFF</span></a>
+                    </div>
+                </div>
+
+                <div class="kn-mat kn-mat-qb kn-card">
+                    <h3 style="color: darkgreen;">Allen Digital NEET Study Material 2026</h3>
+                    <ul class="kn-subs">
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Physics</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/1WcAg-2izvMhabqYQpi1Uri8Txq2UAIg3?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Chemistry</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/1WcAg-2izvMhabqYQpi1Uri8Txq2UAIg3?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Biology</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/1WcAg-2izvMhabqYQpi1Uri8Txq2UAIg3?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                    </ul>
+                    <div class="kn-mat-foot">
+                        <a class="hero-btn"
+                            href="https://wa.me/+918851552167?text=I%20want%20to%20BUY%20Allen%20NEET%20PCB%20Material%20Pdf"
+                            target="_blank" rel="noopener">
+                            <span class="kn-btn-label">Buy PCB</span>
+                            <s>&#8377;2000</s>
+                            <b>&#8377;1000</b>
+                            <span class="kn-off">50% OFF</span></a>
+                        <a class="hero-btn"
+                            href="https://wa.me/+918851552167?text=I%20want%20to%20Buy%20Allen%20NEET%20single%20subject%20Module%20pdf"
+                            target="_blank" rel="noopener">
+                            <span class="kn-btn-label">Buy 1 Subject</span>
+                            <s>&#8377;1000</s>
+                            <b>&#8377;500</b>
+                            <span class="kn-off">50% OFF</span></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+ <section class="kn-section">
+        <div class="kn-wrap">
+            <div class="kn-mat-grid">
+
+                <div class="kn-mat kn-mat-study kn-card">
+                    <h3 style="color: brown;">Allen Digital JEE Advance Study Material 2025</h3>
+                    <ul class="kn-subs">
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Physics</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/19ryIR_uPoG4rKI0jn0Z2ZgX8K-616D4R?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Chemistry</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/19ryIR_uPoG4rKI0jn0Z2ZgX8K-616D4R?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Maths</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/19ryIR_uPoG4rKI0jn0Z2ZgX8K-616D4R?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                    </ul>
+                    <div class="kn-mat-foot">
+                        <a class="hero-btn"
+                            href="https://wa.me/+918851552167?text=I%20want%20to%20BUY%20Allen%20JEE%20Advance%20PCM%20Material%20Pdf"
+                            target="_blank" rel="noopener">
+                            <span class="kn-btn-label">Buy PCM </span>
+                            <s>&#8377;1500</s>
+                            <b>&#8377;700/-</b>
+                            <span class="kn-off">50% OFF</span></a>
+                        <a class="hero-btn"
+                            href="https://wa.me/+918851552167?text=I%20want%20to%20Buy%20Allen%20JEE%20single%20subject%20Module%20pdf"
+                            target="_blank" rel="noopener">
+                            <span class="kn-btn-label">Buy 1 Subject</span>
+                            <s>&#8377;700 </s>
+                            <b>&#8377;350/-</b>
+                            <span class="kn-off">50% OFF</span></a>
+                    </div>
+                </div>
+
+                <div class="kn-mat kn-mat-qb kn-card">
+                    <h3 style="color: darkgreen;">Allen Digital NEET Study Material 2025</h3>
+                    <ul class="kn-subs">
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Physics</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/1qLMHNJI18lTgg-QgvjloBS4utt7uX0cj?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Chemistry</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/1qLMHNJI18lTgg-QgvjloBS4utt7uX0cj?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                        <li>
+                            <span class="kn-sub-name"><i class="fa-solid fa-book"></i> Biology</span>
+                            <a class="kn-preview"
+                                href="https://drive.google.com/drive/folders/1qLMHNJI18lTgg-QgvjloBS4utt7uX0cj?usp=drive_link"
+                                target="_blank" rel="noopener">Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </li>
+                    </ul>
+                    <div class="kn-mat-foot">
+                        <a class="hero-btn"
+                            href="https://wa.me/+918851552167?text=I%20want%20to%20BUY%20Allen%20NEET%20PCB%20Material%20Pdf"
+                            target="_blank" rel="noopener">
+                            <span class="kn-btn-label">Buy PCB</span>
+                            <s>&#8377;1500</s>
+                            <b>&#8377;700</b>
+                            <span class="kn-off">50% OFF</span></a>
+                        <a class="hero-btn"
+                            href="https://wa.me/+918851552167?text=I%20want%20to%20Buy%20Allen%20NEET%20single%20subject%20Module%20pdf"
+                            target="_blank" rel="noopener">
+                            <span class="kn-btn-label">Buy 1 Subject</span>
+                            <s>&#8377;700</s>
+                            <b>&#8377;350</b>
+                            <span class="kn-off">50% OFF</span></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ============================================== 5. why choose us ====== -->
+    <section class="kn-section">
+        <div class="kn-wrap">
+            <div class="kn-head">
+                <h2>Why Choose Us?</h2>
+            </div>
+
+            <div class="kn-why-frame">
+                <div class="kn-why-grid">
+                    <div class="kn-why-item">
+                        <i class="fa-solid fa-trophy"></i>
+                        <h4>High Quality<br>Verified Questions</h4>
+                    </div>
+                    <div class="kn-why-item">
+                        <i class="fa-solid fa-book-open"></i>
+                        <h4>Chapter-Wise<br>Organized</h4>
+                    </div>
+                    <div class="kn-why-item">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <h4>Latest Syllabus<br>&amp; Exam Pattern</h4>
+                    </div>
+                    <div class="kn-why-item">
+                        <i class="fa-solid fa-bullseye"></i>
+                        <h4>Perfect For<br>Top Ranks</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================================================= 6. stats band ====== -->
+    <section class="kn-stats">
+        <div class="kn-wrap">
+            <div class="kn-stats-grid">
+                <div class="kn-stat">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <strong>10000</strong>
+                    <span>Students</span>
+                </div>
+                <div class="kn-stat">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <strong>250</strong>
+                    <span>PDFs</span>
+                </div>
+                <div class="kn-stat">
+                    <i class="fa-solid fa-star"></i>
+                    <strong>4.9</strong>
+                    <span>Rating</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================================= 7. custom material creation ======== -->
+    <section class="kn-section">
+        <div class="kn-wrap">
+            <div class="kn-head">
+                <h2>Custom Material Creation</h2>
+                <p>We don't just sell ready-made packages — we build an academic ecosystem tailored specifically to
+                    your institute and its pedagogy.</p>
+            </div>
+
+            <div class="kn-cmc-grid">
+                <div class="kn-cmc-card kn-card">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <h4>Study Module</h4>
+                    <p>Get customised study modules</p>
+                </div>
+                <div class="kn-cmc-card kn-card">
+                    <i class="fa-solid fa-file-pen"></i>
+                    <h4>Test Series / DPP</h4>
+                    <p>Get customised test series &amp; DPP</p>
+                </div>
+                <div class="kn-cmc-card kn-card">
+                    <i class="fa-solid fa-award"></i>
+                    <h4>Question Bank</h4>
+                    <p>Get customised question banks</p>
+                </div>
+                <div class="kn-cmc-card kn-card">
+                    <i class="fa-solid fa-desktop"></i>
+                    <h4>PPT</h4>
+                    <p>Get customised teaching PPTs</p>
+                </div>
+            </div>
+
+            <div class="kn-cta-row">
+                <a class="kn-cta"
+                    href="https://wa.me/+918851552167?text=I%20want%20to%20request%20custom%20material%20development"
+                    target="_blank" rel="noopener">
+                    <i class="fab fa-whatsapp"></i> Request Custom Material Development
+                </a>
+                <!-- Gmail ka web compose naye tab me khulta hai (mailto: nahi,
+                     warna Windows par desktop Mail/Outlook app khul jata tha). -->
+                <a class="kn-cta" id="knMailCta" target="_blank" rel="noopener"
+                    href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=kotanotesadda@gmail.com&amp;su=Custom%20Material%20Development%20Requirement&amp;body=Institute%20name%3A%0ASubjects%20needed%3A%0ATarget%20exam%20%28JEE%20%2F%20NEET%29%3A%0AWhat%20you%20need%20%28modules%20%2F%20DPP%20%2F%20test%20series%20%2F%20question%20bank%20%2F%20PPT%29%3A%0AAny%20other%20details%3A%0A">
+                    <i class="fa-solid fa-envelope"></i> Send Your Requirement
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================ 8. how we work with you = -->
+    <section class="kn-section kn-how">
+        <div class="kn-wrap">
+            <div class="kn-head">
+                <h2>How We Work With You</h2>
+            </div>
+
+            <div class="kn-how-grid">
+                <div class="kn-how-card kn-card">
+                    <span class="kn-how-icon">
+                        <i class="fa-solid fa-comments"></i>
+                        <b>1</b>
+                    </span>
+                    <div class="kn-how-body">
+                        <h4>Requirement Analysis</h4>
+                        <p>We discuss your curriculum needs, target exams (JEE/NEET), and formatting preferences.</p>
+                    </div>
+                </div>
+                <div class="kn-how-card kn-card">
+                    <span class="kn-how-icon">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <b>2</b>
+                    </span>
+                    <div class="kn-how-body">
+                        <h4>Content Curation</h4>
+                        <p>Our subject matter experts compile top-tier theory, exercises, and question banks.</p>
+                    </div>
+                </div>
+                <div class="kn-how-card kn-card">
+                    <span class="kn-how-icon">
+                        <i class="fa-solid fa-stamp"></i>
+                        <b>3</b>
+                    </span>
+                    <div class="kn-how-body">
+                        <h4>White-Label Branding</h4>
+                        <p>We integrate your institute's logo, colours, and watermarks across all materials.</p>
+                    </div>
+                </div>
+                <div class="kn-how-card kn-card">
+                    <span class="kn-how-icon">
+                        <i class="fa-solid fa-headset"></i>
+                        <b>4</b>
+                    </span>
+                    <div class="kn-how-body">
+                        <h4>Delivery &amp; Support</h4>
+                        <p>You receive the editable/PDF files, with ongoing support for updates and test series.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================ 9. faculty testimonial === -->
+    <!-- ------------------------------------------------------------------------
+         >>>>>>>>>>  DHYAN DEIN: neeche ke 4 testimonials DUMMY hain  <<<<<<<<<<
+
+         Ye sirf design dikhane ke liye likhe gaye hain. Naam, institute aur
+         quotes — sab banaye hue hain, kisi asli faculty ke nahi.
+         Site live karne se PEHLE inhe asli quotes se badalna zaroori hai.
+
+         Har card me 3 jagah bharni hain:  blockquote / <b>naam</b> / <span>role</span>
+
+         PHOTO: pehle card me image/testimonial_user_1_avatar.jpg lagi hai.
+         Baaki teen me abhi placeholder user icon hai. Photo aane par
+         .kn-avatar ke andar wale <i> ki jagah ye daal dena:
+             <img src="image/testimonial_user_2_avatar.jpg" alt="Faculty ka naam">
+
+         >> PHOTO KA SIZE: square rakhna (jaise 320 x 320) aur chehra beech
+            me. Circle me photo bina zoom ke fit ho jayegi. Poori/landscape
+            photo di to sar kat sakta hai — pehle square crop kar lena.
+         --------------------------------------------------------------------- -->
+    <section class="kn-section">
+        <div class="kn-wrap">
+            <div class="kn-head">
+                <h2>Faculty Testimonial</h2>
+            </div>
+
+            <div class="kn-fac-carousel" tabindex="0" aria-label="Faculty testimonials">
+                <div class="kn-fac-viewport">
+                    <div class="kn-fac-track">
+                        <div class="kn-fac-card">
+                            <div class="kn-quote">&ldquo;</div>
+                            <blockquote>We used to spend the first three weeks of every session compiling notes by hand.
+                                They delivered our complete Physics module &mdash; theory plus exercises &mdash; with
+                                our own cover and watermark in under a month.</blockquote>
+                            <div class="kn-fac-by">
+                                <div class="kn-avatar"><img src="image/testimonial_user_1_avatar.jpg"
+                                        alt="Rajeev Ranjan"></div>
+                                <div>
+                                    <b>Rajeev Ranjan</b>
+                                    <span>Physics Faculty &middot; Vidya Classes, Patna</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="kn-fac-card">
+                            <div class="kn-quote">&ldquo;</div>
+                            <blockquote>The question bank they built for us is genuinely exam-oriented, chapter-wise
+                                with detailed solutions. What I valued most is that they followed our teaching sequence
+                                instead of handing over a ready-made file.</blockquote>
+                            <div class="kn-fac-by">
+                                <div class="kn-avatar"><i class="fa-solid fa-user"></i></div>
+                                <div>
+                                    <b>Sneha Kulkarni</b>
+                                    <span>Chemistry Faculty &middot; Aarambh Academy, Nashik</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="kn-fac-card">
+                            <div class="kn-quote">&ldquo;</div>
+                            <blockquote>Our NEET batch needed NCERT-aligned practice sets. They turned our chapter list
+                                into a full PYQ-based question bank, and the two rounds of revisions we asked for were
+                                handled without any fuss.</blockquote>
+                            <div class="kn-fac-by">
+                                <div class="kn-avatar"><i class="fa-solid fa-user"></i></div>
+                                <div>
+                                    <b>Anand Menon</b>
+                                    <span>Biology Faculty &middot; Lakshya Institute, Kochi</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="kn-fac-card">
+                            <div class="kn-quote">&ldquo;</div>
+                            <blockquote>White-labelling was the deciding factor for us. Every page carries our logo, we
+                                own the editable files, and parents now see a product that looks as professional as any
+                                Kota institute's.</blockquote>
+                            <div class="kn-fac-by">
+                                <div class="kn-avatar"><i class="fa-solid fa-user"></i></div>
+                                <div>
+                                    <b>Mohit Agarwal</b>
+                                    <span>Director &middot; Gyanodaya Classes, Jaipur</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kn-nav">
+                    <button class="kn-fac-arrow kn-fac-prev" type="button" aria-label="Previous testimonial">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <div class="kn-dots" id="knFacDots"></div>
+                    <button class="kn-fac-arrow kn-fac-next" type="button" aria-label="Next testimonial">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================= 10. faq ==== -->
+    <!-- ------------------------------------------------------------------------
+         Naya sawaal jodna ho to poora <details> block copy-paste kar do.
+         --------------------------------------------------------------------- -->
+    <section class="kn-section">
+        <div class="kn-wrap">
+            <div class="kn-head">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+
+            <div class="kn-faq-list">
+
+                <details class="kn-faq-item">
+                    <summary>How will the study material be delivered?</summary>
+                    <div class="kn-faq-body">Everything is delivered online through Google Drive. Once your order is
+                        confirmed, you receive a shared folder link containing all your files — nothing is shipped
+                        physically, so you get access the same day.</div>
+                </details>
+
+                <details class="kn-faq-item">
+                    <summary>Is the price negotiable?</summary>
+                    <div class="kn-faq-body">Yes. The final price depends on your requirements and how much
+                        customisation you need — the number of subjects, the volume of content and the branding work
+                        involved. Share your requirement with us and we will quote accordingly.</div>
+                </details>
+
+                <details class="kn-faq-item">
+                    <summary>What payment methods do you accept?</summary>
+                    <div class="kn-faq-body">UPI only, for now. We will let you know as soon as more payment options are
+                        available.</div>
+                </details>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================================================ 11. useful links ==== -->
+    <section class="kn-section kn-links">
+        <div class="kn-wrap">
+            <div class="kn-head">
+                <h2>Useful Links</h2>
+            </div>
+
+            <!-- Cards  js/useful-links.js  ki USEFUL_LINKS list se bante hain.
+                 Label / link / icon wahin badalna hai, yahan nahi. -->
+            <div class="kn-links-grid" id="knLinks"></div>
+        </div>
+    </section>
+
+
+    <!-- ================================================ page nav + footer === -->
+
+    
+    <footer class="footer">
+      <div class="container">
+        <div class="row1">
+          <div class="footer-col">
+            <h4>IIT JEE Materials</h4>
+            <ul style="list-style-type:disc; color: white;">
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="index.html">All Module</a>
+              </li>
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="ALN.html">Allen</a>
+              </li>
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="Saral.html">e-saral</a>
+              </li>
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="Motion.html">Motion</a>
+              </li>
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="Resso.html">Resonance</a>
+              </li>
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="Dak.html">Dakshana</a>
+              </li>
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="Academy.html">Unacademy</a>
+              </li>
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="VCM.html">VMC JEE</a>
+              </li>
+
+            </ul>
+
+          </div>
+          <div class="footer-col">
+            <h4>NEET UG Materials</h4>
+            <ul style="list-style-type:disc ;color: white;">
+
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="index.html">All Module</a>
+              </li>
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="ALN.html">Allen</a>
+              </li>
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="Aksh.html">Aakash </a>
+              </li>
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="Dak.html">Dakshana</a>
+              </li>
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="Academy.html">Unacademy</a>
+              </li>
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="Test.html">Test Series</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Explore Books</h4>
+            <ul style="list-style-type:disc; color: white; margin-left:5px;">
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="Book.html">Cengage</a>
+              </li>
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="Book.html">Disha foundation</a>
+              </li>
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="Book.html">Arihant</a>
+              </li>
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="Book.html">GRB</a>
+              <li>
+                <a style="color: rgb(204, 204, 204);" href="Book.html">MC Grawhill</a>
+              </li>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>follow us </h4>
+            <div class="social-links">
+              <a href=""><i class="fab fa-facebook-f"></i></a>
+              <a href=""><i class="fab fa-instagram"></i></a>
+              <a href=""><i class="fab fa-twitter"></i></a>
+              <a href=""><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="copyright">Copyrights © 2026 KOTA NOTES ADDA All rights reserved.</p>
+    </footer>
+
+
+    <script>
+        var navLinks = document.getElementById("navLinks");
+
+        // inline style ki jagah class toggle — panel ki width CSS me
+        // badle to yahan kuch chhune ki zaroorat nahi padegi
+        function showMenu() {
+            navLinks.classList.add("is-open");
+            knMenuBackdrop.classList.add("is-open");
+            document.body.classList.add("kn-menu-open");
+        }
+
+        function hideMenu() {
+            navLinks.classList.remove("is-open");
+            knMenuBackdrop.classList.remove("is-open");
+            document.body.classList.remove("kn-menu-open");
+        }
+
+
+        /* ------------------------------------------------------------------
+           "Send Your Requirement" button
+
+           HTML me Gmail ka web compose link laga hai — desktop par wahi
+           sahi hai, naye tab me Gmail compose khul jata hai.
+
+           Phone par web Gmail se accha hai native Gmail app. Isliye phone
+           par ise mailto: me badal dete hain — Android/iPhone dono seedha
+           Gmail app ka compose kholte hain, subject aur body bhare hue.
+
+           Email, subject aur body sirf HTML ke href me likhe hain. Yahan
+           wahi se padh kar mailto banate hain, taaki content do jagah
+           maintain na karna pade — badalna ho to sirf href badlo.
+           ------------------------------------------------------------------ */
+        (function () {
+            var cta = document.getElementById("knMailCta");
+            if (!cta) { return; }
+
+            var isPhone = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            if (!isPhone) { return; }
+
+            try {
+                var q = new URL(cta.href).searchParams;
+                var to = q.get("to") || "";
+                if (!to) { return; }
+
+                cta.href = "mailto:" + to +
+                    "?subject=" + encodeURIComponent(q.get("su") || "") +
+                    "&body=" + encodeURIComponent(q.get("body") || "");
+
+                // mailto naye tab me kholne se ek khaali tab peechhe reh jata hai
+                cta.removeAttribute("target");
+                cta.removeAttribute("rel");
+            } catch (e) {
+                /* purana browser: Gmail web wala link waise hi chalta rahega */
+            }
+        })();
+    </script>
+
+    <script src="js/carousel.js"></script>
+    <script src="js/useful-links.js"></script>
+
+</body>
+
+</html>
