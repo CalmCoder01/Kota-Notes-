@@ -25,7 +25,7 @@ function getPageList(totalPages, page, maxLength) {
 
 $(function () {
     var numberOfItems = $(".card-content .card").length;
-    var limitPerPage = 40; //How many card items visible per a page
+    var limitPerPage = 60; //How many card items visible per a page
     var totalPages = Math.ceil(numberOfItems / limitPerPage);
     var paginationSize = 2; //How many page elements visible in the pagination
     var currentPage;
